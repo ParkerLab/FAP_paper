@@ -93,7 +93,7 @@ hvgs <- getTopHVGs(dec, n=2000)
 dge_smp <- findNhoodGroupMarkers(rna_milo, da_results, subset.row = hvgs, subset.groups = c("10"))
 write.table(dge_smp, "de_all_sex.tsv", quote = FALSE, row.names = FALSE, sep = "\t")
 
-#testing within FAPs
+#testing within FAPs, change this as well for whatever variable interested in
 dge_12 <- testDiffExp(rna_milo, da_results, design = ~ sex, meta.data = data.frame(colData(rna_milo)),
                      subset.row = hvgs, subset.nhoods=da_results$NhoodGroup=="10")
 dge_12 <- as.data.frame(dge_12)
