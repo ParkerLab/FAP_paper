@@ -1,11 +1,12 @@
 # FAP_paper
 This repo contains the code used to develop the manuscript "Discovering stimulatory state specific type 2 diabetes GWAS mechanisms with single-cell multi-omics on iPSC-derived fibro-adipogenic progenitors."
 
-Rough outline of code to be included:
-
-FUSION analyses (figure 1):
+FUSION analyses (figure 1 and supp fig 1):
 1. FAP abundance analyses
 2. Milo analyses
+
+
+Rough outline of code to be included:
 
 Differentiation analyses (figure 2):
 1. FACS differentiation analyses
