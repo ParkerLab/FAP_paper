@@ -1,6 +1,6 @@
-#This code generates supp fig 2B/C, and figure 2C.
+#This code generates fig 2E, and figure S2A-B.
 
-#single line, over course of differentiation, numbers were taken from flow cytometry data
+#single line, over course of differentiation, numbers were taken from flow cytometry data (Fig S2A)
 gene <- c("Tra-1-60", "NT5E", "Tra-1-60", "NT5E", "Tra-1-60", "NT5E")
 exp_level <- c(73.4, 7.25, 1.8, 11.5, 0.42, 74.8)
 data <- data.frame(gene, exp_level)
@@ -9,7 +9,7 @@ data$Day <- factor(data$Day, levels=c("Day -2", "Day 6", "Day 21"))
 library(ggplot2)
 ggplot(data, aes(x=Day, y=exp_level, group = gene, color=gene)) + geom_line(size = 1.5) + geom_point(size = 4) + xlab("Day of Differentiation") + ylab("Percentage of Cells Expressing") + theme_bw() + scale_color_manual(values = c("Tra-1-60" = "orange", "NT5E" = "purple"))
 
-#different single line, over course of differentiation, numbers were taken from flow cytometry data
+#different single line, over course of differentiation, numbers were taken from flow cytometry data (Fig S2B)
 gene <- c("Tra-1-60", "NT5E", "Tra-1-60", "NT5E", "Tra-1-60", "NT5E")
 exp_level <- c(94.9, 6.96, 0.86, 0.45, 0.37, 99.8)
 data <- data.frame(gene, exp_level)
@@ -19,7 +19,7 @@ library(ggplot2)
 ggplot(data, aes(x=Day, y=exp_level, group = gene, color=gene)) + geom_line(size = 1.5) + geom_point(size = 4) + xlab("Day of Differentiation") + ylab("Percentage of Cells Expressing") + theme_bw() + scale_color_manual(values = c("Tra-1-60" = "orange", "NT5E" = "purple"))
 
 
-#aggregate of all differentiations I have time course data for (Fig 2C)
+#aggregate of all differentiations I have time course data for (Fig 2E)
 diff <- read.csv("~/Christa/Research/Parker Lab/Flow Cytometry Data/all_differentiations.csv")
 diff$day <- factor(diff$day, levels=c("Day -2", "Day 6", "Day 21"))
 
