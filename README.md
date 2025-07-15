@@ -4,18 +4,18 @@ This repo contains the code used to develop the manuscript "Discovering stimulat
 FUSION analyses (figure 1 and supp fig 1):
 1. FAP abundance analyses
 2. Milo analyses
+Differentiation analyses (figure 2 and supp fig 2):
+1. Line plot of differentiation
+2. Logistic regression to FUSION
 
 
 Rough outline of code to be included:
 
-Differentiation analyses (figure 2):
-1. FACS differentiation analyses
-2. Endpoint FACS histogram
-3. Logistic regression to FUSION
-
 Insulin stimulated glucose uptake assay analyses (figure 3):
-1. Luminesence analyses
-2. LMM analyses
+1. Census-seq analyses and roll call heatmap
+2. Histogram of differentiations/R analysis of differentiations
+3. Luminesence analyses
+4. LMM analyses
 
 FAP Village Multiome analyses (figure 4-6):
 1. Census-seq analysis
