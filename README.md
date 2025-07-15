@@ -7,15 +7,13 @@ FUSION analyses (figure 1 and supp fig 1):
 Differentiation analyses (figure 2 and supp fig 2):
 1. Line plot of differentiation
 2. Logistic regression to FUSION
-
-
-Rough outline of code to be included:
-
 Insulin stimulated glucose uptake assay analyses (figure 3):
 1. Census-seq analyses and roll call heatmap
 2. Histogram of differentiations/R analysis of differentiations
 3. Luminesence analyses
 4. LMM analyses
+
+Rough outline of code to be included:
 
 FAP Village Multiome analyses (figure 4-6):
 1. Census-seq analysis
