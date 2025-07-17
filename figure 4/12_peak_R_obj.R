@@ -1,0 +1,18 @@
+setwd("/scratch/scjp_root/scjp1/christav/fap_village_multiome/results/differential_peaks/glmnb/")
+
+library(Seurat)
+library(anndata)
+library(data.table)
+library(ggplot2)
+library(glue)
+#library(qvalue)
+library(tidyr)
+library(scater)
+library(cowplot)
+library(reticulate)
+library(zellkonverter)
+
+ad <- reticulate::import("anndata", convert = FALSE)
+pad <- ad$read_h5ad("../pf.peak_mat_coarse.h5ad")
+pads = AnnData2SCE(pad, raw=TRUE, X_name="ATAC")
+save(pads, file = "peak_mat.Rda")
