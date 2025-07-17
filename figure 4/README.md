@@ -21,7 +21,7 @@ gzip /scratch/scjp_root/scjp1/christav/fap_village_multiome/input/vcf/fusion_iPS
 ```
 
 Doublet detection was then performed as outlined here: https://github.com/ParkerLab/Multiome-Doublet-Detection-NextFlow 
-Nuclei that were not labelled as doublets according to demuxlet were selected as pass QC nuclei.
+Nuclei that were not labelled as doublets according to demuxlet were selected as final pass QC nuclei.
 
 The provided pipelines generate bigwig files for ATAC, to generate for RNA can do something like this:
 
@@ -52,4 +52,28 @@ snRNA based analyses:
 9_milo.R - Code for Figure S4E and F, milo on the iPSC-FAPs.
 
 snATAC based analyses:
-TBC
+
+First need to filter and sort fragment files from initial ATAC analyses to just final pass QC nuclei. 
+10_filter.py - Script used here for filtering.
+
+```
+/scratch/scjp_root/scjp1/christav/fap_village_multiome/results/differential_peaks/scripts/filter.py /scratch/scjp_root/scjp1/christav/fap_village_multiome/work/ATAC_work/bc/3a5e4e271d1d1412976b96aebd5e0f/basal-hg38.frags.bed /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/RNA_clustering/basal_atac_barcode_list.txt 4 > /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/ATAC_results/fragment-file/basal.frags.filtered.final.bed
+
+sort -k4,4 -k1,1 -k2n,2 -k3n,3 /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/ATAC_results/fragment-file/basal.frags.filtered.final.bed > /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/ATAC_results/fragment-file/basal.frags.filtered.final.sorted.bed
+```
+
+11_snapatac_joint.ipynb - Then can use snapATAC2 to get joint peaks between insulin and basal samples.
+
+12_peak_R_obj.R - R script to extract peak information from snapATAC2 object, also needed.
+
+13_glmnb.R - R script to perform differential peak identification using a Negative Binomial Generalized Linear Mixed Model (NBGLMM), this was performed in 50 batches (there's a line at the end to select which batch to run). Commented out section at the beginning gives how to generate the metadata file used in the linear mixed model.
+
+After that you'll have 50 files of FAP peaks, can use the line below to concat them all into the same file.
+
+```
+awk 'NR==1 {header=$_} FNR==1 && NR!=1 { $_ ~ $header getline; } {print}' *.tsv > FAP_all.tsv
+```
+
+14_filter_peaks.R - Gives code to apply FDR correction to the peaks, identify significantly different peaks, and find the values for Figure 4L.
+
+15_volcano_plot_peaks.R - Code to generate Figure 4M.
