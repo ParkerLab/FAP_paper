@@ -27,8 +27,11 @@ FAP Cell Village Multiome analyses (figure 4 and supp fig 4):
 9. Differential peak identification
 10. Milo on iPSC-FAPs
 
-Rough outline of code to be included:
+Allelic bias analyses (Figure 5): (to be completed when figure is finalized)
+1. WASP
+2. Collecting allele counts
+3. Binomial test
 
-Figures 5 and 6:
-8. Allelic bias (WASP)
-10. Gene expression GWAS enrichment
+GWAS Enrichment (Figure 6):
+1. scDRS analysis
+2. Bar plot of average enrichment per iPSC-FAP subcluster
