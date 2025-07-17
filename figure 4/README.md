@@ -54,6 +54,7 @@ snRNA based analyses:
 snATAC based analyses:
 
 First need to filter and sort fragment files from initial ATAC analyses to just final pass QC nuclei. 
+
 10_filter.py - Script used here for filtering.
 
 ```
