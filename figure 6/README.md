@@ -2,7 +2,7 @@ For Figure 6, using the tool scDRS as described here: https://martinjzhang.githu
 
 1_get_h5ad.R - First need to convert the Seurat object to an h5ad object.
 
-Then can use scDRS to compute enrichment scores using their command line interface:
+Then can use scDRS to compute enrichment scores using their command line interface (I am using the pre-generated GWAS data from the scDRS paper: Zhang*, Hou*, et al. "Polygenic enrichment distinguishes disease associations of individual cells in single-cell RNA-seq data", Nature Genetics, 2022.):
 
 ```
 scdrs compute-score \
