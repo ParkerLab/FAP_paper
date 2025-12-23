@@ -10,29 +10,26 @@ Differentiation analyses (figure 2 and supp fig 2):
 2. Jaccard similarity score
 3. Logistic regression to FUSION
 
-Insulin stimulated glucose uptake assay analyses (figure 3):
+Insulin stimulated glucose uptake assay analyses (figure 3 and supp fig 3):
 1. Census-seq analyses and roll call heatmap
 2. Histogram of differentiations/R analysis of differentiations
 3. Luminesence analyses
 4. LMM analyses
 
-FAP Cell Village Multiome analyses (figure 4 and supp fig 4):
-1. Census-seq analysis
+FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1):
+1. Census-seq analysis, comparison of census-seq and demuxlet
 2. Initial RNA/ATAC analyses
-3. Multiome QC/doublet detection (initial, redo with sctricter parameters)
+3. Multiome QC/doublet detection
 4. Setting up UCSC browser
 5. RNA clustering
 6. Spearman correlation to FUSION
-7. Trajectory analyses
-8. Differential gene expression (MAST, clusterProfiler)
-9. Differential peak identification
-10. Milo on iPSC-FAPs
+7. Differential gene expression (MAST, clusterProfiler)
+8. Differential peak identification
 
-Allelic bias analyses (Figure 5): (to be completed when figure is finalized)
-1. WASP
-2. Collecting allele counts
+FAP sub-types (figure 5 and supp fig 5):
+1. Pseudotime analyses
+2. Milo analyses
 3. Binomial test
-
-GWAS Enrichment (Figure 6):
-1. scDRS analysis
-2. Bar plot of average enrichment per iPSC-FAP subcluster
+4. Setting up UCSC by sub-type
+5. GWAS enrichment analyses
+6. SCENT analyses
