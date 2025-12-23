@@ -171,6 +171,19 @@ both_donors <- rbind(basal_donors, insulin_donors)
 ggplot(both_donors, aes(x=reorder(donor, -freq), y=freq, fill = enviro)) +
   ggtitle("Multiome Donors") + xlab("Donors") + ylab("Frequency") +
   geom_bar(stat = "identity", position=position_dodge()) + theme(axis.text.x = element_text(angle = 45, vjust = 1, hjust=1))
+#figure comparing to census seq (Fig S4A)
+census_seq <- read.table("census_seq_results.txt", header = T, sep = "\t")
+census_seq_basal <- subset(census_seq, Environment == "BASAL")
+census_seq_insulin <- subset(census_seq, Environment == "INSULIN")
+colnames(basal_donors) <- c("DONOR", "frac", "Environment", "demuxlet_frac")
+colnames(insulin_donors) <- c("DONOR", "frac", "Environment", "demuxlet_frac")
+basal_both <- merge(census_seq_basal, basal_donors, by = "DONOR")
+insulin_both <- merge(census_seq_insulin, insulin_donors, by = "DONOR")
+comparison <- rbind(basal_both, insulin_both)
+comparison$DONOR <- as.character(comparison$DONOR)
+ggplot(comparison, aes(x=REPRESENTATION, y=demuxlet_frac, color = DONOR)) +
+  geom_point() + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+  xlab("Census-seq fraction") + ylab("demuxlet fraction") 
 
 #getting all of the UMAPs and QC metrics for clustering
 DimPlot(rna, reduction = "umap", group.by = "enviro")
