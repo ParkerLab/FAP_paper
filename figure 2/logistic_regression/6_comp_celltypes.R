@@ -1,8 +1,8 @@
 setwd("~/links/christav/fall22_multiome/log_reg")
 
-cell_type_comp <- read.table("12036results-cell-type-specific-peaks.tsv", header = T, sep = "\t")
+cell_type_comp <- read.table("12345results-cell-type-specific-peaks.tsv", header = T, sep = "\t")
 
-cell_type_comp <- subset(cell_type_comp, our_cell_type == "12036")
+cell_type_comp <- subset(cell_type_comp, our_cell_type == "12345")
 cell_type_comp$coef <- cell_type_comp$coef+2
 cell_type_comp$norm_coeff <- cell_type_comp$coef/max(cell_type_comp$coef)
 cell_type_comp <- cell_type_comp[order(-cell_type_comp$norm_coeff),]
