@@ -113,7 +113,7 @@ ggplot(data = all.fcHurdle, aes(x = log2FC, y = -log10(pvalue), col = diffexpres
   geom_vline(xintercept = c(-0.6, 0.6), col = "gray", linetype = 'dashed') +
   geom_hline(yintercept = -log10(0.05), col = "gray", linetype = 'dashed') + 
   geom_point(size = 2) + 
-  scale_color_manual(values = c("#00AFBB", "grey", "#bb0c00"), # to set the colours of our variable  
+  scale_color_manual(values = c("#bb0c00", "grey", "#00AFBB"), # to set the colours of our variable  
                      labels = c("Downregulated", "Not significant", "Upregulated")) + # to set the labels in case we want to overwrite the categories from the dataframe (UP, DOWN, NO)
   coord_cartesian(ylim = c(0, 350), xlim = c(-4, 4)) + # since some genes can have minuslog10padj of inf, we set these limits
   labs(color = 'Significance', #legend_title, 
