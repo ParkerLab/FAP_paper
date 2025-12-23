@@ -72,7 +72,7 @@ normalized_insulin <- qnorm((rank(insulin_ins_prenorm$corrected.lum,na.last="kee
 insulin_ins_prenorm$quantnorm_lum <- normalized_insulin
 #saved as new_corr_counts
 
-#got the mean of counts and set to quantnorm_lum_mean, plot below is Figure 3D
+#got the mean of counts and set to quantnorm_lum_mean, plot below is Figure 3D (can reduce to a single individual for Figure SB as well)
 ggplot(figure_mean, aes(x=Environment, y=quantnorm_lum, colour = Line)) + 
   geom_jitter(width = 0.1, alpha=0.5) + geom_point(aes(Environment, quantnorm_lum_mean), shape=95, size=20, alpha=0.5) +
   ylab("Normalized Lum") 
