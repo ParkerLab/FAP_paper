@@ -23,17 +23,21 @@ gzip /scratch/scjp_root/scjp1/christav/fap_village_multiome/input/vcf/fusion_iPS
 Doublet detection was then performed as outlined here: https://github.com/ParkerLab/Multiome-Doublet-Detection-NextFlow 
 Nuclei that were not labelled as doublets according to demuxlet were selected as final pass QC nuclei.
 
-The provided pipelines generate bigwig files for ATAC, to generate for RNA can do something like this:
-
+Reads were then normalized to 10 million reads which can be done as follows:
 ```
-bedtools genomecov -ibam ../prune/basal-hg38.before-dedup.bam -bg > basal.bedgraph
+ntags=`samtools flagstat /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/ATAC_results/prune/basal-hg38.pruned.bam | grep "in total" | cut -f1`
 
-LC_COLLATE=C sort -k1,1 -k2,2n basal.bedgraph > basal.sorted.bedgraph
+less basal-hg38_treat_pileup.bdg \
+| awk -v ntags="$ntags" '{ $4 = $4 * 10000000 / ntags; print $1, $2, $3, $4 }' OFS='\t' \
+| intersectBed -a - -b /gpfs/accounts/scjp_root/scjp99/arushiv/muscle-sn/data/chrom_bed/hg38_chromsizes.bed -sorted \
+| sort -k1,1 -k2,2n \
+> basal-hg38.bgnorm
 
-bedGraphToBigWig basal.sorted.bedgraph /scratch/scjp_root/scjp0/shared_data/reference/human/hg38/hg38.chrom_sizes basal_rna.bw
+bedGraphToBigWig basal-hg38.bgnorm /gpfs/accounts/scjp_root/scjp99/arushiv/muscle-sn/data/chrom_sizes/hg38.chrom_sizes basal-atac-norm10m.bw
 ```
 
-The resulting UCSC browser session is available at: https://genome.ucsc.edu/s/chventresca/FAP%20Village%20Multiome
+The resulting UCSC browser session is available at: 
+https://genome.ucsc.edu/s/chventresca/FAP_Village_Multiome_norm10Mreads
 
 snRNA based analyses:
 
