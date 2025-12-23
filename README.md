@@ -29,7 +29,6 @@ FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1):
 FAP sub-types (figure 5 and supp fig 5):
 1. Pseudotime analyses
 2. Milo analyses
-3. Binomial test
-4. Setting up UCSC by sub-type
-5. GWAS enrichment analyses
-6. SCENT analyses
+3. Setting up UCSC by sub-type
+4. GWAS enrichment analyses
+5. SCENT analyses
