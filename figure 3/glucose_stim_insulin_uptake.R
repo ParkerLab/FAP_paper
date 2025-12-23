@@ -1,4 +1,4 @@
-#This gives Figure 3D and E
+#This gives Figure 3D and E-H
 #Pre-processing of the glucose stimulated insulin uptake assay involved averaging background fluorescence off of the plate (I had a full row of empty wells) and subtracting that from each well.
 
 setwd("C:/Users/chris/OneDrive/Documents/Christa/Research/Parker Lab/Plate Reader/08.2024")
@@ -81,7 +81,7 @@ ggplot(figure_mean, aes(x=Environment, y=quantnorm_lum, colour = Line)) +
 t.test(basal$quantnorm_lum, basal_ins$quantnorm_lum, paired = TRUE, alternative = "two.sided")
 t.test(insulin$quantnorm_lum, insulin_ins$quantnorm_lum, paired = TRUE, alternative = "two.sided")
 
-#Finally set up a linear mixed model with donor metadata and plotting it (Figure 3E)
+#Finally set up a linear mixed model with donor metadata and plotting it (Figure 3E-H)
 library(tidyr)
 library(ggpubr)
 #adding metadata to the luminescence data
@@ -97,7 +97,51 @@ corr_counts_meta$bmi <- as.numeric(corr_counts_meta$bmi)
 library(lme4)
 library(lmerTest)
 
-#first basal
+#first basal (Figure 3E)
+mixed.lmer <- lmer(quantnorm_lum ~ age + sex + ogtt + bmi + (1|Line), data = basal)
+summary(mixed.lmer)
+#save as basal_ins_model to plot it
+basal_ins_model$Trait <- factor(basal_ins_model$Trait, levels=c("ogttT2D", "sexM", "bmi", "age"))
+basal_ins_model$color_group <- with(basal_ins_model, ifelse(
+  pval < 0.05 & Estimate > 0, "Up (pval < 0.05)",
+  ifelse(pval < 0.05 & Estimate < 0, "Down (pval < 0.05)", "NS")
+))
+ggplot(basal_ins_model, aes(x=Estimate, y=Trait, color = color_group)) + geom_point() +
+  geom_errorbarh(aes(xmin = (Estimate - Std_Error),xmax = (Estimate + Std_Error))) +
+  scale_color_manual(values = c("Up (pval < 0.05)" = "blue",
+                                "Down (pval < 0.05)" = "red",
+                                "NS" = "gray")) +
+  labs(
+    title = "Basal Model",
+    x = "Estimate",
+    y = "Trait",
+    color = "Significance"
+  ) +
+  theme_minimal()
+
+#and insulin (Figure 3F)
+mixed.lmer <- lmer(quantnorm_lum ~ age + sex + ogtt + bmi + (1|Line), data = insulin)
+summary(mixed.lmer)
+#save as basal_ins_model to plot it
+basal_ins_model$Trait <- factor(basal_ins_model$Trait, levels=c("ogttT2D", "sexM", "bmi", "age"))
+basal_ins_model$color_group <- with(basal_ins_model, ifelse(
+  pval < 0.05 & Estimate > 0, "Up (pval < 0.05)",
+  ifelse(pval < 0.05 & Estimate < 0, "Down (pval < 0.05)", "NS")
+))
+ggplot(basal_ins_model, aes(x=Estimate, y=Trait, color = color_group)) + geom_point() +
+  geom_errorbarh(aes(xmin = (Estimate - Std_Error),xmax = (Estimate + Std_Error))) +
+  scale_color_manual(values = c("Up (pval < 0.05)" = "blue",
+                                "Down (pval < 0.05)" = "red",
+                                "NS" = "gray")) +
+  labs(
+    title = "High-Insulin Model",
+    x = "Estimate",
+    y = "Trait",
+    color = "Significance"
+  ) +
+  theme_minimal()
+
+#now basal with insulin stimulation (Figure 3G)
 mixed.lmer <- lmer(quantnorm_lum ~ age + sex + ogtt + bmi + (1|Line), data = basal_ins)
 summary(mixed.lmer)
 #save as basal_ins_model to plot it
@@ -119,7 +163,7 @@ ggplot(basal_ins_model, aes(x=Estimate, y=Trait, color = color_group)) + geom_po
   ) +
   theme_minimal()
 
-#now insulin
+#now insulin with insulin stimulation (Figure 3H)
 mixed.lmer <- lmer(quantnorm_lum ~ age + sex + ogtt + bmi + (1|Line), data = insulin_ins)
 summary(mixed.lmer)
 #save as insulin_ins_model to plot it
