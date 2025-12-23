@@ -14,8 +14,7 @@ Differentiation analyses (figure 2 and supp fig 2):
 Insulin stimulated glucose uptake assay analyses (figure 3 and supp fig 3):
 1. Census-seq analyses and roll call heatmap
 2. Histogram of differentiations/R analysis of differentiations
-3. Luminesence analyses
-4. LMM analyses
+3. Luminesence analyses/LMM analyses of luminesence 
 
 FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1):
 1. Census-seq analysis
