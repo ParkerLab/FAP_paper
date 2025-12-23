@@ -1,4 +1,4 @@
-#This script was for examining the percentage of FAPs in a muscle biopsy from the FUSION study, figure 1E and D.
+#This script was for examining the percentage of FAPs in a muscle biopsy from the FUSION study, figure 1C.
 
 library(dplyr)
 library(tidyr)
@@ -13,11 +13,6 @@ indiv_metadata <- read.table("/scratch/scjp_root/scjp1/christav/milo/metadata/fu
 nuc_metadata <- read.table("/scratch/scjp_root/scjp1/christav/milo/metadata/cluster_info_qc.tsv", header=T) #metadata on each nuclei 
 
 metadata <- nuc_metadata[,c("index", "modality", "barcode", "SNG.1ST", "coarse_cluster_name")]
-#rna_metadata <- subset(metadata, modality == "rna")
-#rna_metadata2 <- subset(rna_metadata, SNG.1ST != "multiome")
-#rna_metadata3 <- rna_metadata2 %>% separate(index, c("rna", "batch", "NM", "batch2", "barcode2"), sep = "\\.")
-
-#if want just RNA, comment out the 2 lines below and run the 3 lines above
 rna_metadata2 <- subset(metadata, SNG.1ST != "multiome")
 rna_metadata3 <- rna_metadata2 %>% separate(index, c("rna", "batch", "NM", "batch2", "barcode2"), sep = "\\.")
 rna_metadata3$seurat <- paste(rna_metadata3$barcode, "_", rna_metadata3$batch, "-NM-", rna_metadata3$batch2, ".decont", sep="")
@@ -101,24 +96,6 @@ write.csv(as.data.frame(res.glu), file="noogttallsexMbmiaget2dfastglufastins_fas
 res.ins <- results(dds, name = "fastins_scaled")
 res.ins
 write.csv(as.data.frame(res.ins), file="noogttallsexMbmiaget2dfastglufastins_fastins.csv") #significant
-
-
-#violin plot of percent FAP by T2D status
-cell_type_counts_individual_wide <- cell_type_counts_individual %>%
-  pivot_wider(
-    names_from = coarse_cluster_name,
-    values_from = count,
-    values_fill = 0  # fill missing combinations with 0
-  )
-indiv_metadata$SNG.1ST <- row.names(indiv_metadata)
-cell_type_counts_individual_wide_meta <- merge(cell_type_counts_individual_wide, indiv_metadata, by = "SNG.1ST")
-cell_type_counts_individual_wide_meta$T2D <- as.factor(cell_type_counts_individual_wide_meta$T2D)
-
-ggplot(cell_type_counts_individual_wide_meta, aes(x=T2D, y=Mesenchymal_Stem_Cell, fill = T2D)) + geom_violin() +
-  ggtitle("Number of FAPs in a Skeletal Muscle Biopsy by T2D Status")
-
-cell_type_counts_individual_wide_meta$Total_Nuclei <- cell_type_counts_individual_wide_meta$Adipocyte+cell_type_counts_individual_wide_meta$Endothelial+cell_type_counts_individual_wide_meta$Macrophage+cell_type_counts_individual_wide_meta$Mesenchymal_Stem_Cell+cell_type_counts_individual_wide_meta$Muscle_Fiber_Mixed+cell_type_counts_individual_wide_meta$Neuromuscular_junction+cell_type_counts_individual_wide_meta$Neuronal+cell_type_counts_individual_wide_meta$Satellite_Cell+cell_type_counts_individual_wide_meta$Smooth_Muscle+cell_type_counts_individual_wide_meta$T_cell+cell_type_counts_individual_wide_meta$Type_1+cell_type_counts_individual_wide_meta$Type_2a+cell_type_counts_individual_wide_meta$Type_2x
-cell_type_counts_individual_wide_meta$Percent_FAP <- (cell_type_counts_individual_wide_meta$Mesenchymal_Stem_Cell/cell_type_counts_individual_wide_meta$Total_Nuclei)*100
 
 ggplot(cell_type_counts_individual_wide_meta, aes(x=T2D, y=Percent_FAP, fill = T2D)) + geom_violin() +
   ggtitle("Percent of FAPs in a Skeletal Muscle Biopsy by T2D Status")
