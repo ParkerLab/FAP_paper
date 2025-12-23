@@ -147,7 +147,7 @@ DimPlot(rna, reduction = "umap", group.by = "donor")
 #then rerun scTransform, PCA, Harmony, UMAP
 saveRDS(rna, file = "RNA_final.rds")
 
-#saving barcodes/donors of finalized clustering, getting plot of donors by sample
+#saving barcodes/donors of finalized clustering, getting plot of donors by sample (Figure 4C)
 barcodes <- colnames(rna)
 barcodes <- as.data.frame(barcodes)
 donors <- rna$donor
@@ -227,31 +227,6 @@ VlnPlot(rna, features = c("ENSG00000124299.14 (PEPD)"))
 VlnPlot(rna, features = c("ENSG00000145431.11 (PDGFC)"))
 FeaturePlot(rna, reduction = "umap", features = c("ENSG00000177606.6 (JUN)", "ENSG00000170345.10 (FOS)", "ENSG00000159069.14 (FBXW5)", "ENSG00000124299.14 (PEPD)", "ENSG00000145431.11 (PDGFC)"))
 
-#individual donor
-#unique(rna@meta.data$donor)
-#[1] "SNG (32102)" "SNG (32032)" "SNG (32057)" "SNG (32012)" "SNG (32120)" "SNG (12181)"
-#[7] "SNG (32028)" "SNG (12171)" "SNG (12039)" "SNG (12066)" "SNG (12180)" "SNG (32015)"
-#[13] "SNG (32100)" "SNG (12040)" "SNG (12145)" "SNG (12034)" "SNG (12182)" "SNG (12150)"
-#[19] "SNG (32019)" "SNG (32049)" "SNG (12031)" "SNG (32086)" "SNG (32044)" "SNG (32051)"
-#[25] "SNG (32031)" "SNG (12006)" "SNG (32021)" "SNG (12134)" "SNG (22025)"
-cells_to_keep <- rna@meta.data$donor == "SNG (22025)"
-rna_filtered <- rna[, cells_to_keep]
-DimPlot(rna_filtered, reduction = "umap", group.by = "donor")
-
-#adding how long lines were thawed for to the metadata/FACS expression of FAP marker and plotting
-days_thawed <- read.table("days_thawed.txt", sep = "\t", header = T)
-barcodes <- colnames(rna)
-barcodes <- as.data.frame(barcodes)
-donors <- rna$donor
-donors <- as.data.frame(donors)
-barcode_donor <- cbind(barcodes, donors)
-colnames(barcode_donor) <- c("barcode", "donor")
-barcode_donor_days <- merge(barcode_donor, days_thawed, by = "donor")
-barcode_donor_days$donor <- NULL
-barcode_donor_days <- barcode_donor_days[match(colnames(rna), barcode_donor_days$barcode), ]
-rna <- AddMetaData(rna, metadata = barcode_donor_days)
-FeaturePlot(rna, reduction = "umap", features="Days_Thawed", cols = c("red", "blue"))
-FeaturePlot(rna, reduction = "umap", features="FACS", cols = c("red", "blue"))
 
 #clustering just basal or insulin
 rna_basal <- SCTransform(rna_basal, vars.to.regress = c("donor", "age", "sex", "bmi", "ogtt"), verbose = FALSE)
@@ -385,72 +360,6 @@ adipo <- subset(subclusters, new.cluster.ids == "Adipogenic")
 fibro <- subset(subclusters, new.cluster.ids == "Fibrogenic")
 prog <- subset(subclusters, new.cluster.ids == "Progenitors")
 
-#fisher's exact test for subcluster composition
-adipogenic <- subclusters[subclusters$new.cluster.ids == "Adipogenic", ]
-not_adipogenic <- subclusters[subclusters$new.cluster.ids != "Adipogenic", ]
-
-A <- sum(adipogenic$Freq[adipogenic$Var2 == "basal"])    # basal in Adipogenic
-C <- sum(adipogenic$Freq[adipogenic$Var2 == "insulin"])  # insulin in Adipogenic
-B <- sum(not_adipogenic$Freq[not_adipogenic$Var2 == "basal"])    # basal in NOT Adipogenic
-D <- sum(not_adipogenic$Freq[not_adipogenic$Var2 == "insulin"])  # insulin in NOT Adipogenic
-
-contingency_table <- matrix(c(A, C, B, D), nrow = 2, byrow = TRUE,
-                            dimnames = list(c("Adipogenic", "Not_Adipogenic"),
-                                            c("Basal", "Insulin")))
-
-fisher.test(contingency_table)
-#	Fisher's Exact Test for Count Data
-#data:  contingency_table
-#p-value = 1.024e-11
-#alternative hypothesis: true odds ratio is not equal to 1
-#95 percent confidence interval:
-#  0.5440624 0.7189159
-#sample estimates:
-#  odds ratio 
-#0.6257545 
-
-fibrogenic <- subclusters[subclusters$new.cluster.ids == "Fibrogenic", ]
-not_fibrogenic <- subclusters[subclusters$new.cluster.ids != "Fibrogenic", ]
-
-A <- sum(fibrogenic$Freq[fibrogenic$Var2 == "basal"])    # basal in fibrogenic
-C <- sum(fibrogenic$Freq[fibrogenic$Var2 == "insulin"])  # insulin in fibrogenic
-B <- sum(not_fibrogenic$Freq[not_fibrogenic$Var2 == "basal"])    # basal in NOT fibrogenic
-D <- sum(not_fibrogenic$Freq[not_fibrogenic$Var2 == "insulin"])  # insulin in NOT fibrogenic
-
-contingency_table <- matrix(c(A, C, B, D), nrow = 2, byrow = TRUE,
-                            dimnames = list(c("fibrogenic", "Not_fibrogenic"),
-                                            c("Basal", "Insulin")))
-
-fisher.test(contingency_table)
-#		Fisher's Exact Test for Count Data
-#data:  contingency_table
-#p-value = 0.02823
-#alternative hypothesis: true odds ratio is not equal to 1
-#95 percent confidence interval:
-#  1.013754 1.290821
-#sample estimates:
-#  odds ratio 
-#1.144008 
-
-progenitors <- subclusters[subclusters$new.cluster.ids == "Progenitors", ]
-not_progenitors <- subclusters[subclusters$new.cluster.ids != "Progenitors", ]
-
-A <- sum(progenitors$Freq[progenitors$Var2 == "basal"])    # basal in progenitors
-C <- sum(progenitors$Freq[progenitors$Var2 == "insulin"])  # insulin in progenitors
-B <- sum(not_progenitors$Freq[not_progenitors$Var2 == "basal"])    # basal in NOT progenitors
-D <- sum(not_progenitors$Freq[not_progenitors$Var2 == "insulin"])  # insulin in NOT progenitors
-
-contingency_table <- matrix(c(A, C, B, D), nrow = 2, byrow = TRUE,
-                            dimnames = list(c("progenitors", "Not_progenitors"),
-                                            c("Basal", "Insulin")))
-
-fisher.test(contingency_table)
-#	Fisher's Exact Test for Count Data
-#data:  contingency_table
-#p-value = 0.000205
-#alternative hypothesis: true odds ratio is not equal to 1
-#95 percent confidence interval:
-#  1.106986 1.396084
 #sample estimates:
 #  odds ratio 
 #1.243177 
