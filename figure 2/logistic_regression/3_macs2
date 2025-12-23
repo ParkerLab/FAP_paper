@@ -1,0 +1,18 @@
+#commands to run for each sample:
+
+#convert bam to bed
+bedtools bamtobed -i ../bam_indiv/E-donor_12345.bam > ../bam_indiv/E-donor_12345.bed
+
+#run macs2
+macs2 callpeak -t ../bam_indiv/E-donor_12345.bed --outdir ../macs2 --SPMR -f BED -n E-donor_12345 -g hs --nomodel --shift -100 --seed 762873 --extsize 200 -B --broad --keep-dup all
+
+#merge duplicates together (had two: sample D and sample E)
+cat D-donor_12345_peaks.broadPeak E-donor_12345_peaks.broadPeak > 12345.broadPeak
+sort -k1,1 -k2,2n 12345.broadPeak > 12345.sorted.broadPeak
+bedtools merge -i 12345.sorted.broadPeak > 12345.merged.broadPeak
+
+#converting to bigWig for UCSC
+bedtools unionbedg -i D-donor_12345_treat_pileup.bdg E-donor_12345_treat_pileup.bdg > 12345.bdg
+#adding columns 4 and 5 together to get sum of counts across replicates
+awk '{OFS="\t"; print $1, $2, $3, $4 + $5}' 12345.bdg > 12345_sum.bdg
+bedGraphToBigWig 12345_sum.bdg /scratch/scjp_root/scjp0/shared_data/reference/human/hg38/hg38.chrom_sizes 12039.bw
