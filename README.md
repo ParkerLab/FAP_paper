@@ -4,6 +4,7 @@ This repo contains the code used to develop the manuscript "Discovering stimulat
 FUSION analyses (figure 1 and supp fig 1):
 1. FAP abundance analyses
 2. Milo analyses
+3. Testing for significantly different peak
 
 Differentiation analyses (figure 2 and supp fig 2):
 1. Line plot of differentiation
