@@ -1,0 +1,11 @@
+#After running the snATAC pipeline (expanded for Figure 4), can use bedtools jaccard to perform the similarity analysis
+#need broadpeak files for samples you want to compare
+
+#Sorting for top 200,000 peaks, then resort by position
+sort -k5,5nr day21.sorted.broadPeak | head -n 200000 > day21_top200000.broadPeak
+sort -k1,1 -k2,2n day21_top200000.broadPeak > day21_top200000.sorted.bed
+
+#bedtools jaccard comparison, requiring 75% of iPSC-FAPs peaks to be overlapped
+bedtools jaccard -a /scratch/scjp_root/scjp1/christav/fall22_multiome/jaccard/day21_top200000.sorted.bed -b /scratch/scjp_root/scjp1/christav/fall22_multiome/jaccard/fap_narrow.sorted.bed -f 0.75 > jaccard_day21_200000broadpeak_narrow_0.75.txt
+
+#and modify for the different time points/samples etc
