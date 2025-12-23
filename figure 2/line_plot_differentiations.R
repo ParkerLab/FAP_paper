@@ -1,4 +1,4 @@
-#This code generates fig 2E, and figure S2A-B.
+#This code generates fig 2E, and figure S2A-C.
 
 #single line, over course of differentiation, numbers were taken from flow cytometry data (Fig S2A)
 gene <- c("Tra-1-60", "NT5E", "Tra-1-60", "NT5E", "Tra-1-60", "NT5E")
@@ -42,3 +42,8 @@ diff2$day=as.factor(diff2$day)
 
 ggplot(diff2, aes(x=day, y=exp, group = marker, color=marker)) + geom_line(size = 1.5) + geom_point(size = 4) + xlab("Day of Differentiation") + ylab("Percentage of Cells Expressing") + theme_bw() + scale_color_manual(values = c("Tra-1-60" = "orange", "NT5E" = "purple")) +
   geom_errorbar(aes(ymin=exp-sd, ymax=exp+sd, width=.2))
+
+
+#showing individual points instead of error bars (supp fig 2C)
+ggplot(diff, aes(x=day, y=exp, group = marker, color=marker, shape = source)) + geom_jitter(size = 4) + xlab("Day of Differentiation") + ylab("Percentage of Cells Expressing") + theme_bw() + scale_color_manual(values = c("Tra-1-60" = "orange", "NT5E" = "purple")) +
+  stat_summary(fun = mean, geom = "line", aes(group = marker), size = 2)
