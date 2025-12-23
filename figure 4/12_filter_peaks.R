@@ -34,9 +34,3 @@ write.table(non_sig_peaks, file = "../output/not_sig_peaks/FAP_sig_0.05.tsv", se
 write.table(non_sig_peaks_bed, file = "../output/not_sig_peaks/FAP_sig_0.05.bed", sep='\t', quote = FALSE, row.names = FALSE, col.names = FALSE) 
 write.table(converged_peaks, file = "../output/FAP_converged.tsv", sep='\t', quote = FALSE, row.names = FALSE, col.names = FALSE) 
 write.table(converged_peaks_bed, file = "../output/FAP_converged.bed", sep='\t', quote = FALSE, row.names = FALSE, col.names = FALSE) 
-
-#making venn diagram
-basal_peaks <- subset(sig_peaks, estimate < 0)
-insulin_peaks <- subset(sig_peaks, estimate > 0)
-basal_total_peaks <- subset(converged_peaks, estimate < 0)
-insulin_total_peaks <- subset(converged_peaks, estimate > 0)
