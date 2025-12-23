@@ -41,7 +41,7 @@ https://genome.ucsc.edu/s/chventresca/FAP_Village_Multiome_norm10Mreads
 
 snRNA based analyses:
 
-3_clustering.R - R code to generate Figure 4C-D and Supp Fig 4A-C.
+3_clustering.R - R code to generate Figure 4C-D and Supp Fig 4A-C. (This also has code for Fig 5A and Fig S5A-C as those are based on the clustering analyses.)
 
 4_correlation.R - R code to generate Figure SB.
 
