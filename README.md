@@ -17,7 +17,7 @@ Insulin stimulated glucose uptake assay analyses (figure 3 and supp fig 3):
 4. LMM analyses
 
 FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1):
-1. Census-seq analysis, comparison of census-seq and demuxlet
+1. Census-seq analysis
 2. Initial RNA/ATAC analyses
 3. Multiome QC/doublet detection
 4. Setting up UCSC browser
