@@ -1,5 +1,5 @@
 #Generalizable code, I tweaked this depending on what metadata variables I was interested in testing for.
-#This gives how to get Figure 1F, G, H and Supp Fig 1A, C, D, F, G, I, J, L, M, O
+#This gives how to get Figure 1E-G and Supp Fig 1A-J
 
 library(Seurat)
 library(miloR)
