@@ -1,0 +1,10 @@
+# Formatted GWAS data for fGWAS
+gwas: ["data/sumstats_selected/*.bed.gz", ".bed.gz"]
+# traitbeds: "/lab/work/arushiv/proinsulin/fgwas_organize/results/sumstats/*.sumstats.bed"
+
+type: "gwas"
+  
+# Annotations to run on - currently set to take all annotation bed file in the path specified in DATA['annotations']
+annotations: ["/scratch/scjp_root/scjp1/christav/fap_village_multiome/results/subcluster_peaks/macs2/Adipogenic.merged.broadPeak", ".broadPeak"]
+  
+  
