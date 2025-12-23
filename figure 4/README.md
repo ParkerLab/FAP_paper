@@ -63,7 +63,7 @@ First need to filter and sort fragment files from initial ATAC analyses to just 
 sort -k4,4 -k1,1 -k2n,2 -k3n,3 /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/ATAC_results/fragment-file/basal.frags.filtered.final.bed > /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/ATAC_results/fragment-file/basal.frags.filtered.final.sorted.bed
 ```
 
-9_snapatac_joint.ipynb - Then can use snapATAC2 to get joint peaks between insulin and basal samples.
+9_snapATAC_joint.ipynb - Then can use snapATAC2 to get joint peaks between insulin and basal samples.
 
 10_peak_R_obj.R - R script to extract peak information from snapATAC2 object, also needed.
 
