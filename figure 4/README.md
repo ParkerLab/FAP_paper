@@ -78,3 +78,8 @@ awk 'NR==1 {header=$_} FNR==1 && NR!=1 { $_ ~ $header getline; } {print}' *.tsv 
 12_filter_peaks.R - Gives code to apply FDR correction to the peaks and identify significantly different peaks.
 
 13_volcano_plot_peaks.R - Code to generate Figure 4I.
+
+HOMER was run using the below command:
+```
+findMotifsGenome.pl FAP_basal_sig_0.05.bed hg38 HOMER_basal -preparsedDir HOMER_genome
+```
