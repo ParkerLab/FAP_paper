@@ -16,7 +16,7 @@ Insulin stimulated glucose uptake assay analyses (figure 3 and supp fig 3):
 2. Histogram of differentiations/R analysis of differentiations
 3. Luminesence analyses/LMM analyses of luminesence 
 
-FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1):
+FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1-3):
 1. Census-seq analysis
 2. Initial RNA/ATAC analyses
 3. Multiome QC/doublet detection
@@ -25,6 +25,7 @@ FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1):
 6. Spearman correlation to FUSION
 7. Differential gene expression (MAST, clusterProfiler)
 8. Differential peak identification
+9. Transcription factor motif enrichment
 
 FAP sub-types (figure 5 and supp fig 5):
 1. Pseudotime analyses
@@ -32,5 +33,4 @@ FAP sub-types (figure 5 and supp fig 5):
 3. Binomial test
 4. Setting up UCSC by sub-type
 5. GWAS enrichment analyses
-6. Variant calling
-7. SCENT analyses
+6. SCENT analyses
