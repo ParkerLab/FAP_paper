@@ -1,0 +1,101 @@
+configfile: "config.yaml"
+
+SAMPLES = config["samples"]
+rs = config["rs"]
+genome = config["genome"]
+
+def get_star_index(genome):
+	return config["star_index"][genome]
+
+rule all:
+	input:
+		expand("results/fastqc/before_trim/{samples}/", samples=SAMPLES),
+		expand("results/fastqc/after_trim/{samples}/", samples=SAMPLES),
+		expand("results/STAR/{samples}/", samples=SAMPLES),
+		expand("results/featurecounts/{samples}_featurecounts.txt", samples=SAMPLES),
+		expand("results/forRanalysis/{samples}_Rmatrix.txt", samples=SAMPLES)
+
+rule fastqc:
+    input:
+        "data/fastq/{sample}_R1.fastq",
+        "data/fastq/{sample}_R2.fastq"
+    output:
+        directory("results/fastqc/before_trim/{sample}/")
+    params:
+        outdir = ("results/fastqc/before_trim/{sample}/")
+    log:
+        "results/fastqc/before_trim/{sample}.log"
+    shell:
+        """
+        mkdir -p {output}
+        fastqc {input} -o {params.outdir} 2> {log}
+        """
+
+rule trim:
+	input:
+		"data/fastq/{sample}_R1.fastq",
+		"data/fastq/{sample}_R2.fastq"
+	output:
+		"data/after_trim/{sample}_R1_trim.fastq",
+		"data/after_trim/{sample}_R2_trim.fastq"
+	shell:
+		"cta {input} {output}"
+
+rule fastqc_2:
+	input:
+		"data/after_trim/{sample}_R1_trim.fastq",
+		"data/after_trim/{sample}_R2_trim.fastq"
+	output:
+		directory("results/fastqc/after_trim/{sample}/")
+	params:
+		outdir = ("results/fastqc/after_trim/{sample}/")
+	log:
+		"results/fastqc/after_trim/{sample}.log"
+	shell:
+		"""
+		mkdir -p {output}
+		fastqc {input} -o {params.outdir} 2> {log}
+		"""
+
+rule STAR: 
+	input:
+		"data/after_trim/{sample}_R1_trim.fastq",
+		"data/after_trim/{sample}_R2_trim.fastq"
+	output:
+		directory("results/STAR/{sample}/")
+	params:
+		index = lambda wildcards: get_star_index(genome)
+	singularity:
+		'library://porchard/default/star:2.7.10a'
+	log:
+		"results/STAR/{sample}.log"
+	shell:
+		"""
+		mkdir -p {output}
+		STAR --genomeDir {params.index} \
+		--readFilesIn {input} \
+		--outFileNamePrefix {output} \
+		--outSAMtype BAM SortedByCoordinate \
+		--outSAMunmapped Within \
+		--outSAMattributes Standard 
+		"""
+
+rule featurecounts:
+	input:
+		"results/STAR/{sample}Aligned.sortedByCoord.out.bam"
+	output:
+		"results/featurecounts/{sample}_featurecounts.txt"
+	params:
+		"/lab/work/christav/reference/gtf/gencode.v38.annotation.gtf"
+	log:
+		"results/featurecounts/{sample}_featurecounts.log"
+	shell:
+		"featureCounts -p -B -C -a {params} -o {output} -g gene_name {input} 2> {log}"
+
+rule forR:
+	input:
+		"results/featurecounts/{sample}_featurecounts.txt"
+	output:
+		"results/forRanalysis/{sample}_Rmatrix.txt"
+	shell:
+		"cut -f1,7,8,9,10,11,12 {input} > {output}"
