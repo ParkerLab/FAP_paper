@@ -8,8 +8,9 @@ FUSION analyses (figure 1 and supp fig 1):
 
 Differentiation analyses (figure 2 and supp fig 2):
 1. Line plot of differentiation
-2. Jaccard similarity score
-3. Logistic regression to FUSION
+2. Bulk RNA-seq analysis
+3. Jaccard similarity score
+4. Logistic regression to FUSION
 
 Insulin stimulated glucose uptake assay analyses (figure 3 and supp fig 3):
 1. Census-seq analyses and roll call heatmap
