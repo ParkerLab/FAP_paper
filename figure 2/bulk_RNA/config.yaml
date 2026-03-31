@@ -1,0 +1,9 @@
+samples: #list your samples here
+  - 1
+  - 2
+genome: "hg38"
+rs:
+  - R1
+  - R2
+star_index: 
+  hg38: "/lab/work/porchard/reference/STAR/2.7.10a/hg38"
