@@ -25,7 +25,7 @@ nrow(pos_sample_pos)/nrow(pos_sample)*100
 #put the data in a spreadsheet for the next step
 
 
-#For Figure 3B, just a simple histogram of the FACS data.
+#For Figure 4B, just a simple histogram of the FACS data.
 
 #histogram of all 30 differentiations
 scatter_data <- read.csv("~/Christa/Research/Parker Lab/Flow Cytometry Data/batch30data.csv", header = TRUE)
