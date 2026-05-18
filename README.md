@@ -6,18 +6,18 @@ FUSION analyses (figure 1 and supp fig 1):
 2. Milo analyses
 3. Testing for significantly different peak
 
-Differentiation analyses (figure 2 and supp fig 2):
+Differentiation analyses (figure 3 and supp fig 3):
 1. Line plot of differentiation
 2. Bulk RNA-seq analysis
 3. Jaccard similarity score
 4. Logistic regression to FUSION
 
-Insulin stimulated glucose uptake assay analyses (figure 3 and supp fig 3):
+Insulin stimulated glucose uptake assay analyses (figure 4 and supp fig 4):
 1. Census-seq analyses and roll call heatmap
 2. Histogram of differentiations/R analysis of differentiations
 3. Luminesence analyses/LMM analyses of luminesence 
 
-FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1-3):
+FAP Cell Village Multiome analyses (figure 5, supp fig 5, and supp table 1-3):
 1. Census-seq analysis
 2. Initial RNA/ATAC analyses
 3. Multiome QC/doublet detection
@@ -28,10 +28,10 @@ FAP Cell Village Multiome analyses (figure 4, supp fig 4, and supp table 1-3):
 8. Differential peak identification
 9. Transcription factor motif enrichment
 
-FAP sub-types (figure 5 and supp fig 5):
+FAP subtypes (figure 6 and supp fig 6):
 1. Pseudotime analyses
 2. Milo analyses
 3. Binomial test
-4. Setting up UCSC by sub-type
+4. Setting up UCSC by subtype
 5. GWAS enrichment analyses
 6. SCENT analyses
