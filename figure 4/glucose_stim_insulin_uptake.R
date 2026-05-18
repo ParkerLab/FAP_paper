@@ -1,4 +1,4 @@
-#This gives Figure 3D and E-H
+#This gives Figure 4D and E-H
 #Pre-processing of the glucose stimulated insulin uptake assay involved averaging background fluorescence off of the plate (I had a full row of empty wells) and subtracting that from each well.
 
 setwd("C:/Users/chris/OneDrive/Documents/Christa/Research/Parker Lab/Plate Reader/08.2024")
