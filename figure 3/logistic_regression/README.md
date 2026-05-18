@@ -17,4 +17,4 @@ From here:
 python /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/log_reg_celltype/scripts/1_overall_log_reg.py --peaks /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/log_reg_celltype/fusion_data/day-2-12345.label.broadPeak /scratch/scjp_root/scjp1/christav/fall22_multiome/macs2/day21-12345.label.broadPeak --zhang-matrix /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/log_reg_celltype/fusion_data/fusion.matrix.mtx --zhang-cell-types /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/log_reg_celltype/fusion_data/fusion.celltypes.tsv --zhang-peaks /scratch/scjp_root/scjp1/christav/fap_village_multiome/results/log_reg_celltype/fusion_data/fusion.peaks.tsv --chrom-sizes /scratch/scjp_root/scjp0/shared_data/reference/human/hg38/hg38.chrom_sizes --tss /scratch/scjp_root/scjp1/christav/reference/hg38.gencode.tss.bed.gz --prefix "12345-"
 ```
 
-6_comp_celltypes.R - R code to generate the heatmap used in the final figure for Fig 2G.
+6_comp_celltypes.R - R code to generate the heatmap used in the final figure for Fig 3D.
