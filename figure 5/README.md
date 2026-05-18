@@ -1,8 +1,8 @@
-This folder contains the bulk of the snRNA+ATAC analyses, it contains code used to generate Figure 4 and Fig S4.
+This folder contains the bulk of the snRNA+ATAC analyses, it contains code used to generate Figure 5 and Fig S5.
 
 Before multiome analyses was started, census-seq was ran on light whole genome sequencing of the cell village as outlined in: https://github.com/chventresca/census-seq
 
-1_census_seq.R - Contains code to generate Figure 4B plot of census-seq data.
+1_census_seq.R - Contains code to generate Figure 5B plot of census-seq data.
 
 For multiome processing, snRNA and snATAC processing was performed as outlined in these pipelines: 
 https://github.com/ParkerLab/snRNAseq-NextFlow 
@@ -41,15 +41,15 @@ https://genome.ucsc.edu/s/chventresca/FAP_Village_Multiome_norm10Mreads
 
 snRNA based analyses:
 
-3_clustering.R - R code to generate Figure 4C-D and Supp Fig 4A-C. (This also has code for Fig S4A comparing to census-seq, and Fig 5A / Fig S5A-C as those are based on the clustering analyses.)
+3_clustering.R - R code to generate Figure 5C-D and Supp Fig 5A-C. (This also has code for Fig S5A comparing to census-seq, and Fig 6A / Fig S6A-C as those are based on the clustering analyses.)
 
-4_correlation.R - R code to generate Figure SB.
+4_correlation.R - R code to generate Figure S5B.
 
-5_differential_expression.R - Code to run MAST and identify differentially expressed genes between insulin and basal samples. Contains instructions for Figure 4F.
+5_differential_expression.R - Code to run MAST and identify differentially expressed genes between insulin and basal samples. Contains instructions for Figure 5F.
 
 6_gene_set_enrich_analysis.ipynb - Code to run clusterProfiler and identify enriched gene sets in the differentially expressed genes.
 
-7_gse_plots.R - Code to generate Figure 4G and Supp 4E based on gene set enrichment. (Can use both 6_gene_set_enrich_analysis.ipynb and/or 7_gse_plots.R to get Table S1.)
+7_gse_plots.R - Code to generate Figure 5G and Supp 5E based on gene set enrichment. (Can use both 6_gene_set_enrich_analysis.ipynb and/or 7_gse_plots.R to get Table S1.)
 
 snATAC based analyses:
 
@@ -77,7 +77,7 @@ awk 'NR==1 {header=$_} FNR==1 && NR!=1 { $_ ~ $header getline; } {print}' *.tsv 
 
 12_filter_peaks.R - Gives code to apply FDR correction to the peaks and identify significantly different peaks.
 
-13_volcano_plot_peaks.R - Code to generate Figure 4I.
+13_volcano_plot_peaks.R - Code to generate Figure 5I.
 
 HOMER was run using the below command:
 ```
