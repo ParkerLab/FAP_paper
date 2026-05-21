@@ -74,6 +74,7 @@ After that you'll have 50 files of FAP peaks, can use the line below to concat t
 ```
 awk 'NR==1 {header=$_} FNR==1 && NR!=1 { $_ ~ $header getline; } {print}' *.tsv > FAP_all.tsv
 ```
+A similar method but using a model testing for the impact of subtype was then used in Figure 6E. 
 
 12_filter_peaks.R - Gives code to apply FDR correction to the peaks and identify significantly different peaks.
 
