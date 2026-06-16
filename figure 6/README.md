@@ -10,7 +10,7 @@ binom.test(838, 1221, 0.6)
 ```
 Where here it tests the number of adipogenic nuclei in the insulin sample, the total adipogenic nuclei, and the expected proportion of insulin nuclei (0.6, as insulin nuclei make up 0.6 of the full sample).
 
-A similar method used in Figure 3 to separate by individual was used to split the ATAC bams by subcluster and call peaks separately. The reads were then normalized to 10 million reads as in Figure 4. This was used for all the UCSC images in Figure 6 and S6.
+A similar method used in Figure 4 to separate by individual was used to split the ATAC bams by subcluster and call peaks separately. The reads were then normalized to 10 million reads as in Figure 5. This was used for all the UCSC images in Figure 6 and S6.
 
 For identifying subtype-specific peaks, we used the same method as in Figure 5 (when identifying basal vs insulin peaks) but used a model testing for the impact of subtype. Since there are 3 subtypes, we ran the model twice, once with adipogenic as the reference cell type and again releveling for progenitors as the reference. A peak was designated as subtype-specific if it showed a positive coefficient and Wald test P < 0.05 in both comparisons involving that subtype, and a non-significant Wald P (> 0.05) for the comparison between the other two subtypes. For example, a peak was called adipogenic-specific if it had positive coefficients and P < 0.05 for adipogenic vs. fibrogenic and adipogenic vs. progenitor comparisons, but P > 0.05 for fibrogenic vs. progenitor. 
 Here's an example calling adipogenic peaks, this would then be modified for the other two subtypes:
