@@ -67,7 +67,7 @@ sort -k4,4 -k1,1 -k2n,2 -k3n,3 /scratch/scjp_root/scjp1/christav/fap_village_mul
 
 10_peak_R_obj.R - R script to extract peak information from snapATAC2 object, also needed.
 
-11_glmnb.R - R script to perform differential peak identification using a Negative Binomial Generalized Linear Mixed Model (NBGLMM), this was performed in 50 batches (there's a line at the end to select which batch to run). Commented out section at the beginning gives how to generate the metadata file used in the linear mixed model.
+11_glmnb.R - R script to perform differential peak identification using a Negative Binomial Generalized Linear Mixed Model (NB-GLMM), this was performed in 50 batches (there's a line at the end to select which batch to run). Commented out section at the beginning gives how to generate the metadata file used in the linear mixed model.
 
 After that you'll have 50 files of FAP peaks, can use the line below to concat them all into the same file.
 
